@@ -15,9 +15,9 @@ rpmbuild_build_dir: "{{ rpmbuild_user_home }}/rpmbuild"
 # RPM macros to be created in the user's directory
 rpmbuild_macros: "
  %_topdir %(echo $HOME)/rpmbuild \n
- %sope_major_version 5 \n
- %sope_minor_version 0 \n
- %sope_version 5.0 \n
+ %sope_major_version 4 \n
+ %sope_minor_version 9 \n
+ %sope_version 4.9 \n
  %sogo_version {{ sogo_ver }} \n
  %sope_source SOPE-%{sogo_version}.tar.gz \n
  %sope_release %(echo `date +%Y%m%d`) \n
