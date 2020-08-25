@@ -1,0 +1,9 @@
+---
+
+- include: sogo_create_user.yml
+- include: sogo_install_deps.yml
+- include: sogo_getting_src.yml
+- include: sogo_compile_src.yml
+- include: sogo_copy_configs.yml
+- include: sogo_firewall_rules.yml
+

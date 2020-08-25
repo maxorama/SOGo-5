@@ -1,0 +1,4 @@
+---
+
+- name: restart bacula
+  service: name=bacula-fd state=restarted
