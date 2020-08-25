@@ -7,5 +7,7 @@ Configuration:
 Compilation:
 - Compillation is building for CentOS 7.x/8.x using rpmbuild
 
+- Not fully working with old SSL versions of mailserver
+
 Backend backup - Bacula client
 
