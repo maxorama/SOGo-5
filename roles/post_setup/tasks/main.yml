@@ -6,3 +6,12 @@
 - name: Coping Host file
   template: src=hosts.j2 dest=/etc/hosts force=yes
 
+- name: display post install message
+  debug:
+    msg: |
+      Things left to do:
+        - To working properly you do need install
+        - self-signed/CA certificate into OS
+        - After that you should run command 'update-ca-trust'
+        - to update root certificate
+ 
