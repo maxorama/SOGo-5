@@ -5,7 +5,7 @@ sogo_ver: 5.0.0
 sogo_title: "Domain"
 mail_srv: mails.domain.ru
 mail_web_srv: mails.domain.ru
-imap_srv: "imaps://{{ mail_srv }}:993/?tls=yes"
+imap_srv: "imaps://{{ mail_srv }}:993/?ssl=yes"
 sieve_srv: "sieve://{{ mail_srv }}:4190/?tls=yes"
 
 base_dc: dc.domain.local
