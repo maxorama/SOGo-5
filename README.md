@@ -6,8 +6,7 @@ Configuration:
 
 Compilation:
 - Compillation is building for CentOS 7.x/8.x using rpmbuild
-
-- Not fully working with old SSL versions of mailserver
+- To fully working with remote Imaps/Pop3s protocol versions of mailserver you should install valid self-signed/CA root certificate or self-signed mailserver certificate to CA authority
 
 Backend backup - Bacula client
 
