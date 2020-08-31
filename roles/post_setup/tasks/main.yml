@@ -14,4 +14,3 @@
         - self-signed/CA certificate into OS
         - After that you should run command 'update-ca-trust'
         - to update root certificate
- 
