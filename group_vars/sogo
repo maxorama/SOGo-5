@@ -3,8 +3,8 @@
 
 sogo_ver: 5.0.0
 sogo_title: "Domain"
-mail_srv: mails.domain.ru
-mail_web_srv: mails.domain.ru
+mail_srv: mails.{{ domain.global }}
+mail_web_srv: mails.{{ domain.global }}
 imap_srv: "imaps://{{ mail_srv }}:993/?ssl=yes"
 sieve_srv: "sieve://{{ mail_srv }}:4190/?tls=yes"
 
