@@ -1,7 +1,7 @@
 ---
 # This playbook deploys the whole application stack in this site.
 
-- name: :Cleanup Cloud-init
+- name: Cleanup Cloud-init
   hosts: all
   remote_user: root
   tags: cleanup
@@ -15,7 +15,7 @@
   hosts: all
   remote_user: root
   tags: common
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
    - include_role: name=firewalld
@@ -43,6 +43,14 @@
   roles:
    - bacula
 
+- name: Deploy Lets-Encrypt certificate
+  hosts: all
+  remote_user: root
+  tags: cert
+
+  roles:
+    - lets-encrypt
+
 - name: Post configuration
   hosts: all
   remote_user: root
@@ -52,6 +60,5 @@
   roles:
    - remove_tmp
    - post_setup
-#   - lets-encrypt
    - reboot
 

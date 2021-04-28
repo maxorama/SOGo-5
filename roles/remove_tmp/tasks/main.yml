@@ -3,16 +3,24 @@
 - name: Ansible delete file glob
   find:
    paths: /tmp/
-   patterns: 'libwbxml*,vagrant*'
+   patterns: 'libwbxml*,vagrant*,gnustep*'
    recurse: True
   register: files_to_delete
 
 - name: Ansible delete directory glob
   find:
-   paths: /root/
-   patterns: 'rpmbuild'
-   recurse: True
-   file_type: directory
+    paths: /root/
+    patterns: 'rpmbuild'
+    recurse: True
+    file_type: directory
+  register: directory_to_delete
+
+- name: Ansible delete directory glob
+  find:
+    paths: /tmp/
+    patterns: 'gnustep*'
+    recurse: True
+    file_type: directory
   register: directory_to_delete
 
 #- debug: msg={{ files_to_delete.files }}
@@ -20,7 +28,7 @@
 
 - name: Ansible remove file glob
   file:
-   path: "{{ item.path }}"
-   state: absent
+    path: "{{ item.path }}"
+    state: absent
   with_items: "{{ files_to_delete.files + directory_to_delete.files }}"
 

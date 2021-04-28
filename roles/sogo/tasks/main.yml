@@ -1,10 +1,24 @@
 ---
 
+- name: Installing GCC repo
+  shell: "curl -1sLf 'https://dl.cloudsmith.io/public/csi/gcc/setup.rpm.sh' | sudo -E bash"
+  become: yes
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
 - include: sogo_create_user.yml
 - include: sogo_install_deps.yml
+
+- include: sogo_install_gnu.yml
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
 - include: sogo_getting_src.yml
 - include: sogo_compile_src.yml
 - include: sogo_copy_configs.yml
 - include: sogo_firewall_rules.yml
-- include: sogo_regexp.yml
+
+- include: sogo_regexp_el7.yml
+  when: ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7'
+
+- include: sogo_regexp_el8.yml  
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
 

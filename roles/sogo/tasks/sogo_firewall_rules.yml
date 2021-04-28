@@ -16,3 +16,10 @@
     enabled: yes
   notify: restart sogod
 
+- name: Ensure Memcached is started and enabled at boot
+  service:
+    name: memcached
+    state: started
+    enabled: yes
+  notify: restart memcached
+

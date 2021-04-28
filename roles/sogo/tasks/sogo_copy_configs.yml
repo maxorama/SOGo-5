@@ -20,3 +20,12 @@
   with_items:
    - sogo-full.svg
    - sogo.ico
+  when: ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7'
+
+- name: Copying SOGo image files
+  copy: src={{ item }} dest=/usr/lib/GNUstep/SOGo/WebServerResources/img/{{ item }} force=yes
+  with_items:
+   - sogo-full.svg
+   - sogo.ico
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+

@@ -1,10 +1,25 @@
 ---
 # This playbook will install MariaDB and create db user and give permissions.
 
+- name: yum | enable epel repository
+  shell: yum-config-manager --enable ol8_codeready_builder
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
+- name: yum | enable epel repository
+  shell: yum-config-manager --enable ol8_distro_builder
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
 - name: Install MariaDB package
   dnf:
    name: ['mariadb', 'mariadb-libs', 'mariadb-server', 'mariadb-devel', 'MySQL-python']
    state: installed
+  when: ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7'
+
+- name: Install MariaDB package
+  dnf:
+   name: ['mariadb', 'mariadb-server', 'mariadb-devel', 'python3-mysql']
+   state: installed
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
 
 - name: Create Mysql configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf

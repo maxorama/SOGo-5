@@ -1,7 +1,7 @@
 %define apache_modules_dir %{_usr}/lib/httpd/modules
 %define apache_conf_dir    %{_sysconfdir}/httpd/conf.d
 %define oracle_support     0
-%{?el7:%define oracle_support 0}
+%{?el7:%define oracle_support 1}
 %{?el8:%define oracle_support 0}
 
 Summary:      SOPE
@@ -449,7 +449,7 @@ rm -fr ${RPM_BUILD_ROOT}
 %{_libdir}/libWEExtensions*.so
 %{_libdir}/libWOExtensions*.so
 %if 0%{?rhel} >= 7
-%{_libdir}/GNUstep/Makefiles
+%{_datadir}/GNUstep/Makefiles
 %else
 %{_datadir}/GNUstep/Makefiles
 %endif

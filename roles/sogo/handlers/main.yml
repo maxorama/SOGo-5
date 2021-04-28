@@ -1,4 +1,7 @@
 ---
 
+- name: restart memcached
+  service: name=memcached state=restarted
+
 - name: restart sogod
   service: name=sogod state=restarted

@@ -13,7 +13,7 @@ rpmbuild_user_home: /root
 rpmbuild_build_dir: "{{ rpmbuild_user_home }}/rpmbuild"
 
 # RPM macros to be created in the user's directory
-rpmbuild_macros: "
+rpmbuild_macros_el7: "
  %_topdir %(echo $HOME)/rpmbuild \n
  %sope_major_version 4 \n
  %sope_minor_version 9 \n
@@ -21,8 +21,6 @@ rpmbuild_macros: "
  %sogo_version {{ sogo_ver }} \n
  %sope_source SOPE-%{sogo_version}.tar.gz \n
  %sope_release %(echo `date +%Y%m%d`) \n
- %sope_buildcoun 1 \n
- %dist_suffix %(echo `date +%Y%m%d`) \n
  %sope_buildcount 1 \n
  %dist_suffix %(echo `date +%Y%m%d`) \n
  %sope_makeflags -b \n
@@ -30,6 +28,23 @@ rpmbuild_macros: "
  %sbjson_major_version 2 \n
  %changelog %(echo `date +%Y%m%d`) \n
  %_gpg_name Admin"
+
+rpmbuild_macros_el8: "
+ %_topdir %(echo $HOME)/rpmbuild \n
+ %sope_major_version 4 \n
+ %sope_minor_version 9 \n
+ %sope_version 4.9 \n
+ %sogo_version {{ sogo_ver }} \n
+ %sope_source SOPE-%{sogo_version}.tar.gz \n
+ %sope_release %(echo `date +%Y%m%d`) \n
+ %sope_buildcount 1 \n
+ %dist_suffix %(echo `date +%Y%m%d`) \n
+ %sope_makeflags -b \n
+ %sbjson_version 2.3.1 \n
+ %sbjson_major_version 2 \n
+ %changelog %(echo `date +%Y%m%d`) \n
+ %_gpg_name Admin \n
+ %_libdir /usr/lib"
 
 # Directory structure to be created in the user's directory
 rpmbuild_dirs:

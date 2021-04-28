@@ -1,14 +1,22 @@
 ---
 
-- name: Test distribution
-  assert:
-    that: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
+#- name: Test distribution
+#  assert:
+#    that: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
 
 - name: Installing rpm-build package
   package:
     name: "{{ rpmbuild_pkg }}"
   tags:
     - rpmbuild_pkg
+
+- set_fact:
+    rpmbuild_macros: "{{ rpmbuild_macros_el7 }}"
+  when: ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7'
+
+- set_fact:
+    rpmbuild_macros: "{{ rpmbuild_macros_el8 }}"
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
 
 - name: Creating the RPM macros file
   template:

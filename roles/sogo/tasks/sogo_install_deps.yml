@@ -1,27 +1,51 @@
 ---
 
+- set_fact:
+    arch: "el7.centos"
+  when: ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7'
+
+- set_fact:
+    arch: "el8"
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
 - name: Installing SOGo dependencies...
-  dnf: 
-   name: ['perl-Thread-Queue', 'perl-srpm-macros', 'gnustep-filesystem', 'gnustep-make', 'gnustep-base', 'gnustep-base-devel', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'libstdc++-devel', 'libobjc', 'gcc-objc', 'gcc-c++', 'gcc-objc++', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'lasso-devel', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip','libzip-devel']
-   state: present
+  dnf:
+    name: ['perl-Thread-Queue', 'perl-srpm-macros', 'gnustep-filesystem', 'gnustep-make', 'gnustep-base', 'gnustep-base-devel', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'libstdc++-devel', 'libobjc', 'gcc-objc', 'gcc-c++', 'gcc-objc++', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'lasso-devel', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip','libzip-devel']
+    state: present
   register: result
   ignore_errors: true
+  when: ansible_facts['distribution'] == 'CentOS' and ansible_facts['distribution_major_version'] == '7'
+
+- name: Installing SOGo dependencies...
+  dnf: 
+    name: ['perl-Thread-Queue', 'perl-srpm-macros', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip', 'libzip-devel', 'expat-devel', 'cmake', 'texinfo', 'gcc-objc', 'gcc-objc++', 'libobjc', 'libffi-devel', 'gnutls-devel', 'libicu-devel', 'libxslt-devel', 'openssl-devel', 'expat-devel', 'lasso-devel', 'python3']
+    state: present
+  register: result
+  ignore_errors: true
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
+- name: Create symlink to python2 package...
+  file:
+    src: /usr/bin/python3
+    dest: /usr/bin/python
+    state: link
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
 
 - name: Copying libwbxml libraries
   copy:
-   src: roles/sogo/templates/rpm/{{ item }}
-   dest: /tmp/{{ item }}
-   mode: 0644
+    src: roles/sogo/templates/rpm/{{ item }}
+    dest: /tmp/{{ item }}
+    mode: 0644
   with_items:
-   - libwbxml-0.11.6-1.el7.centos.x86_64.rpm
-   - libwbxml-devel-0.11.6-1.el7.centos.x86_64.rpm
+    - libwbxml-0.11.6-1.{{ arch }}.x86_64.rpm
+    - libwbxml-devel-0.11.6-1.{{ arch }}.x86_64.rpm
   register: result
   ignore_errors: true
 
 - name: Installing libwbxml libraries
   command: rpm -ivh /tmp/{{ item }}
   with_items:
-   - libwbxml-0.11.6-1.el7.centos.x86_64.rpm
-   - libwbxml-devel-0.11.6-1.el7.centos.x86_64.rpm
+    - libwbxml-0.11.6-1.{{ arch }}.x86_64.rpm
+    - libwbxml-devel-0.11.6-1.{{ arch }}.x86_64.rpm
   ignore_errors: true
 

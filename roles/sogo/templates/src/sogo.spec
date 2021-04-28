@@ -167,7 +167,8 @@ rm -fr ${RPM_BUILD_ROOT}
 # ****************************** build ********************************
 %build
 %if 0%{?rhel} >= 7
-. /usr/lib64/GNUstep/Makefiles/GNUstep.sh
+. /usr/share/GNUstep/Makefiles/GNUstep.sh
+#. /usr/lib64/GNUstep/Makefiles/GNUstep.sh
 %else
 . /usr/share/GNUstep/Makefiles/GNUstep.sh
 %endif
