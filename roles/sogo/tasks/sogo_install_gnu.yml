@@ -1,0 +1,77 @@
+---
+
+- name: Getting GNUstep-make library
+  get_url: url=ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.7.0.tar.gz dest=/tmp/gnustep-make-2.7.0.tar.gz mode=0777
+  register: src_source
+  ignore_errors: false
+
+- name: Extracting GNUstep-make files
+  unarchive:
+    src: "/tmp/gnustep-make-2.7.0.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+  when: src_source.changed
+  register: src_source_unpack
+
+- name: Configuring GNUstep-make
+  command: "./configure --prefix=/usr/"
+  args:
+    chdir: "/tmp/gnustep-make-2.7.0"
+  when: src_source_unpack.changed
+  register: src_configure
+
+- name: Installing GNUstep-make as root
+  make:
+    chdir: "/tmp/gnustep-make-2.7.0"
+    target: install
+  become: yes
+  register: src_install
+
+#- name: Copying gnustep-make.spec file
+#  copy:
+#    src: roles/sogo/templates/src/gnustep-make.spec
+#    dest: /root/rpmbuild/SPECS/gnustep-make.spec
+#    mode: 0644
+#  when: src_source.changed
+#
+#- name: Building GNUstep-make SRPM
+#  command: rpmbuild --define "debug_package %{nil}" -bb SPECS/gnustep-make.spec
+#  args:
+#    chdir: "{{ rpmbuild_build_dir }}"
+#  register: output
+#
+#- name: Installing GNUstep-make library
+#  command: yum install -y {{ rpmbuild_build_dir }}/RPMS/{{ ansible_userspace_architecture }}/gnustep-make-2.7.0-1.x86_64.rpm
+#  ignore_errors: false
+
+- name: Getting GNUstep-base library
+  get_url: url=ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.26.0.tar.gz dest=/tmp/gnustep-base-1.26.0.tar.gz mode=0777
+  register: src_source
+  ignore_errors: false
+
+- name: Extracting GNUstep-base files
+  unarchive:
+    src: "/tmp/gnustep-base-1.26.0.tar.gz"
+    dest: /tmp/
+    remote_src: yes
+  when: src_source.changed
+  register: src_source_unpack
+
+- name: Configuring GNUstep-base
+  command: "./configure --prefix=/usr/"
+  args:
+    chdir: "/tmp/gnustep-base-1.26.0"
+  when: src_source_unpack.changed
+  register: src_configure
+
+- name: Installing GNUstep-base as root
+  make:
+    chdir: "/tmp/gnustep-base-1.26.0"
+    target: install
+  become: yes
+  register: src_install
+
+- name: Running ldconfig
+  command: "/usr/sbin/ldconfig"
+  when: src_install.changed
+
