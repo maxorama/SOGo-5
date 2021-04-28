@@ -1,4 +1,8 @@
 Vagrant.configure("2") do |config|
+  if Vagrant.has_plugin?("vagrant-timezone")
+    config.timezone.value = "Etc/GMT+3"
+  end
+
   config.vm.box = 'ovirt4'
   config.vm.hostname = "<< fqdn >>"
   ssh_pub_key = File.readlines("/root/.ssh/id_rsa.pub").first.strip
@@ -23,8 +27,9 @@ Vagrant.configure("2") do |config|
     ovirt.memory_size = '8 GiB' #see https://github.com/dominikh/filesize for usage
     ovirt.memory_guaranteed = '8192 MB' #see https://github.com/dominikh/filesize for usage
     ovirt.cpu_cores = 2
-    ovirt.cpu_sockets = 2
+    ovirt.cpu_sockets = 1
     ovirt.cpu_threads = 1
+    ovirt.optimized_for = "Server"
   end
 
 #  config.vm.provision "ansible" do |ansible|
