@@ -6,6 +6,16 @@
 - name: Removing Cloud-Init package...
   dnf: name=cloud-init state=absent
 
+- name: Removing cloud-init user...
+  user:
+   name: cloud-user
+   state: absent
+
+- name: Removing cloud-init directory...
+  file:
+   path: /home/cloud-user/
+   state: absent
+
 - name: Removing vagrant user...
   user:
    name: vagrant
@@ -18,5 +28,5 @@
 
 - name: Removing vagrant directory...
   file:
-   path: /vagrant/
+   path: /home/vagrant/
    state: absent
