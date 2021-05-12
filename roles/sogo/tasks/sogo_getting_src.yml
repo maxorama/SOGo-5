@@ -1,5 +1,12 @@
 ---
 
+- name: Installing Mail server certificate
+  copy:
+    src: ca-chain.cert.pem
+    dest: /etc/pki/tls/certs/ca-chain.cert.pem
+    mode: 0644
+  when: mail_tls == "yes"
+
 - name: Getting SOPe source file
   get_url: url=https://packages.inverse.ca/SOGo/sources/SOPE-{{ sogo_ver }}.tar.gz dest=/root/rpmbuild/SOURCES/SOPE-{{ sogo_ver }}.tar.gz mode=0644
   register: result

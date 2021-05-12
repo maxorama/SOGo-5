@@ -13,7 +13,13 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network,
     #:ovirt__network_name => 'ovirtmgmt' #DHCP
     # Static configuration
-    :ovirt__ip => '192.168.10.102', :ovirt__network_name => 'ovirtmgmt', :ovirt__gateway => '192.168.10.254', :ovirt__netmask => '255.255.255.0', :ovirt__dns_servers => '192.168.10.1', :ovirt__dns_search => '<< domain >>'
+    :ovirt__ip => '192.168.10.102',
+    :ovirt__network_name => 'ovirtmgmt',
+    :ovirt__gateway => '192.168.10.254',
+    :ovirt__netmask => '255.255.255.0',
+    :ovirt__dns_servers => '192.168.10.1',
+    :ovirt__dns_search => '<< domain >>',
+    :ovirt__interface_name => 'enp1s0'
 
   config.vm.provider :ovirt4 do |ovirt|
     ovirt.url = 'https://ovirt-engine/ovirt-engine/api'

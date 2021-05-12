@@ -5,8 +5,9 @@ sogo_ver: 5.1.0
 sogo_title: "Domain"
 mail_srv: mails.{{ domain.global }}
 mail_web_srv: mails.{{ domain.global }}
+mail_tls: "yes"
 imap_srv: "imaps://{{ mail_srv }}:993/?ssl=yes"
-sieve_srv: "sieve://{{ mail_srv }}:4190/?tls=yes"
+sieve_srv: "sieve://{{ mail_srv }}:4190/?ssl=yes"
 
 base_dc: dc.domain.local
 base_url: dc=domain,dc=local
