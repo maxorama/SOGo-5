@@ -6,6 +6,26 @@
 - name: Coping Host file
   template: src=hosts.j2 dest=/etc/hosts force=yes
 
+- name: Removing vagrant user...
+  user:
+   name: vagrant
+   state: absent
+
+- name: Removing vagrant group...
+  user:
+   name: vagrant
+   state: absent
+
+- name: Removing vagrant directory...
+  file:
+   path: /home/vagrant/
+   state: absent
+
+- name: Removing vagrant directory...
+  file:
+   path: /vagrant/
+   state: absent
+
 - name: display post install message
   debug:
     msg: |

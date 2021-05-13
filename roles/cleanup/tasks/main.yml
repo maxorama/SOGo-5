@@ -16,17 +16,3 @@
    path: /home/cloud-user/
    state: absent
 
-- name: Removing vagrant user...
-  user:
-   name: vagrant
-   state: absent
-  
-- name: Removing vagrant group...
-  user:
-   name: vagrant
-   state: absent
-
-- name: Removing vagrant directory...
-  file:
-   path: /home/vagrant/
-   state: absent
