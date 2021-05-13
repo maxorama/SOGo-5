@@ -10,7 +10,7 @@
 
 - name: Installing SOGo dependencies...
   dnf:
-    name: ['perl-Thread-Queue', 'perl-srpm-macros', 'gnustep-filesystem', 'gnustep-make', 'gnustep-base', 'gnustep-base-devel', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'libstdc++-devel', 'libobjc', 'gcc-objc', 'gcc-c++', 'gcc-objc++', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'lasso-devel', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip','libzip-devel']
+    name: ['perl-Thread-Queue', 'perl-srpm-macros', 'gnustep-filesystem', 'gnustep-make', 'gnustep-base', 'gnustep-base-devel', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'libstdc++-devel', 'libobjc', 'gcc-objc', 'gcc-c++', 'gcc-objc++', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'lasso-devel', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip','libzip-devel', 'make']
     state: present
   register: result
   ignore_errors: true
@@ -18,7 +18,7 @@
 
 - name: Installing SOGo dependencies...
   dnf: 
-    name: ['perl-Thread-Queue', 'perl-srpm-macros', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip', 'libzip-devel', 'expat-devel', 'cmake', 'texinfo', 'gcc-objc', 'gcc-objc++', 'libobjc', 'libffi-devel', 'gnutls-devel', 'libicu-devel', 'libxslt-devel', 'openssl-devel', 'lasso-devel', 'python3']
+    name: ['perl-Thread-Queue', 'perl-srpm-macros', 'xz-devel', 'libxml2-devel', 'openldap-devel', 'postgresql', 'postgresql-devel', 'postgresql-libs', 'memcached', 'libmemcached', 'libmemcached-devel', 'libcurl-devel', 'expat-devel','libsodium','libsodium-devel','liboath-devel','libzip', 'libzip-devel', 'expat-devel', 'cmake', 'make','texinfo', 'gcc-objc', 'gcc-objc++', 'libobjc', 'libffi-devel', 'gnutls-devel', 'libicu-devel', 'libxslt-devel', 'openssl-devel', 'lasso-devel', 'python3']
     state: present
   register: result
   ignore_errors: true
