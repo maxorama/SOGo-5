@@ -26,6 +26,11 @@
    path: /vagrant/
    state: absent
 
+- name: Update certificate CA
+  command: /usr/bin/update-ca-trust
+  ignore_errors: false
+  when: ansible_facts['distribution'] == 'OracleLinux' and ansible_facts['distribution_major_version'] == '8'
+
 - name: display post install message
   debug:
     msg: |
