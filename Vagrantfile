@@ -30,12 +30,15 @@ Vagrant.configure("2") do |config|
     ovirt.cluster = '<< Cluster name >>'
     ovirt.template = 'CentOS_7.6_Tmpl_Vagrant'
     ovirt.console = 'spice'
-    ovirt.memory_size = '8 GiB' #see https://github.com/dominikh/filesize for usage
+    ovirt.memory_size = '8192 MB' #see https://github.com/dominikh/filesize for usage
+    ovirt.memory_maximum = '8192 MB'
     ovirt.memory_guaranteed = '8192 MB' #see https://github.com/dominikh/filesize for usage
     ovirt.cpu_cores = 2
     ovirt.cpu_sockets = 1
     ovirt.cpu_threads = 1
     ovirt.optimized_for = "Server"
+    ovirt.description = "Test"
+    ovirt.comment = "Comments"
   end
 
 #  config.vm.provision "ansible" do |ansible|
