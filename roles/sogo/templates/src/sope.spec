@@ -316,7 +316,8 @@ fi
 ./configure \
             --enable-debug \
             --disable-strip \
-	    --with-gnustep
+	    --with-gnustep \
+            --ca-bundle=/etc/pki/tls/certs/ca-chain.cert.pem
 
 make CC="$CC" %{sope_makeflags}
 cd sope-gdl1/MySQL
